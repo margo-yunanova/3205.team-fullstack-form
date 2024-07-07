@@ -1,4 +1,4 @@
-import { http, HttpResponse } from 'msw';
+import { http, HttpResponse, delay } from 'msw';
 import db from './db';
 
 export const handlers = [
@@ -14,14 +14,12 @@ export const handlers = [
       );
     }
 
-    const user = db.filter(
-      (item) =>
-        (item.email === email && item.number === number) ||
-        (item.email === email && number === null),
-
-      //item.email === email ? item.number === number ? true : number === undefined ? true : false
+    const users = db.filter(
+      (user) =>
+        user.email === email && (number === null || user.number === number),
     );
 
-    return HttpResponse.json(user);
+    await delay(5000);
+    return HttpResponse.json(users);
   }),
 ];

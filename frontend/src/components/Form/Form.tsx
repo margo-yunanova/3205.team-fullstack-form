@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { FC } from 'react';
 import { forwardRef } from 'react';
 import { IMaskInput } from 'react-imask';
@@ -66,10 +66,14 @@ export const Form: FC<IForm> = ({ setUsers }) => {
     },
   });
 
+  const [isLoading, setIsLoading] = useState(false);
+
   const onSubmit = async (data) => {
     try {
+      setIsLoading(true);
       const result = await getUser(data);
       setUsers(result);
+      setIsLoading(false);
     } catch (e) {
       console.error(e);
     }
@@ -87,7 +91,7 @@ export const Form: FC<IForm> = ({ setUsers }) => {
         onSubmit={handleSubmit(onSubmit)}
       >
         <Typography variant="h4" sx={{ fontWeight: 'bold' }}>
-          Введите данные
+          Users search
         </Typography>
         <CardContent
           sx={{
@@ -119,13 +123,6 @@ export const Form: FC<IForm> = ({ setUsers }) => {
               control={control}
               render={({ field }) => (
                 <>
-                  {/* <InputLabel htmlFor="number">Number</InputLabel>
-                    <Input
-                      {...field}
-                      name="textmask"
-                      id="number"
-                      inputComponent={TextMaskCustom as any}
-                    /> */}
                   <TextField
                     error={!!errors.number}
                     type="tel"
@@ -143,8 +140,12 @@ export const Form: FC<IForm> = ({ setUsers }) => {
           </Stack>
         </CardContent>
         <CardActions>
-          <Button variant="contained" type="submit" disabled={!isValid}>
-            Submit
+          <Button
+            variant="contained"
+            type="submit"
+            disabled={!isValid || isLoading}
+          >
+            {isLoading ? 'Searching...' : 'Search'}
           </Button>
         </CardActions>
       </Stack>

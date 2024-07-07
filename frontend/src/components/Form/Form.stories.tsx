@@ -1,8 +1,8 @@
 import React from 'react';
 import type { Meta, StoryObj } from '@storybook/react';
-import { Form } from './Form';
+import { Form } from '.';
 import { ThemeProvider } from '@emotion/react';
-import { theme } from '../theme/theme';
+import { theme } from '../../theme/theme';
 
 const meta: Meta<typeof Form> = {
   title: 'form/Form',

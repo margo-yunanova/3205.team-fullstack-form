@@ -1,10 +1,8 @@
 import { http, HttpResponse } from 'msw';
-import { BASE_URL } from '../utils/api';
 import db from './db';
 
 export const handlers = [
-  http.get(BASE_URL, async (request) => {
-    console.log('http.get');
+  http.get('/api/v1/user', async ({ request }) => {
     const url = new URL(request.url);
     const email = url.searchParams.get('email');
     const number = url.searchParams.get('number');
@@ -16,20 +14,13 @@ export const handlers = [
       );
     }
 
-    const user = db.find(
+    const user = db.filter(
       (item) =>
         (item.email === email && item.number === number) ||
-        (item.email === email && number === undefined),
+        (item.email === email && number === null),
 
       //item.email === email ? item.number === number ? true : number === undefined ? true : false
     );
-
-    if (!user) {
-      return new HttpResponse(
-        { message: 'Пользователь не найден' },
-        { status: 404 },
-      );
-    }
 
     return HttpResponse.json(user);
   }),

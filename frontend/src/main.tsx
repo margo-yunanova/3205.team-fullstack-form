@@ -7,6 +7,7 @@ import './index.css';
 import { theme } from './theme/theme.ts';
 
 async function enableMocking() {
+  return;
   if (process.env.NODE_ENV !== 'development') {
     return;
   }

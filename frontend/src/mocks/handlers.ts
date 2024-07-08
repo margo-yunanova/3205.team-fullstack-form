@@ -8,10 +8,10 @@ export const handlers = [
     const number = url.searchParams.get('number');
 
     if (!email) {
-      return new HttpResponse(
-        { message: 'В запросе нет email' },
-        { status: 400 },
-      );
+      return new HttpResponse(null, {
+        status: 400,
+        statusText: 'В запросе нет email',
+      });
     }
 
     const users = db.filter(

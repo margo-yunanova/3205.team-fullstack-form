@@ -29,7 +29,7 @@ function App() {
       />
       {users && users.length > 0 && <UsersTable users={users} />}
       {users && users.length === 0 && !isLoading && (
-        <Typography>Users not found</Typography>
+        <Typography variant="h5">Users not found</Typography>
       )}
       {isLoading && (
         <>

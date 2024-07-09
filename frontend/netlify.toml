@@ -4,10 +4,16 @@ functions = "netlify/functions"
 publish = "dist"
 
 ## Redirect for Single Page Applications like create-react-app.
+## [[redirects]]
+## from = "/*"
+## to = "/index.html"
+## status = 200
+
 [[redirects]]
-from = "/*"
-to = "/index.html"
+force = true
+from = 'X/api/v1/user'
 status = 200
+to = '/.netlify/edge/functions/get-user-form'
 
 ## (optional) Settings for Netlify Dev
 ## https://github.com/netlify/cli/blob/main/docs/netlify-dev.md#project-detection

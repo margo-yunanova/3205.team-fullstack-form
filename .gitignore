@@ -25,3 +25,6 @@ dist-ssr
 
 # Optional npm cache directory
 .npm
+
+# Local Netlify folder
+.netlify

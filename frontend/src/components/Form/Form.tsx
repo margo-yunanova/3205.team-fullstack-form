@@ -1,11 +1,10 @@
-import React, { useState } from 'react';
 import { FC } from 'react';
 import { forwardRef } from 'react';
 import { IMaskInput } from 'react-imask';
 import { useForm, Controller } from 'react-hook-form';
 import { object, string } from 'yup';
 import { yupResolver } from '@hookform/resolvers/yup';
-import { getUser } from '../../utils/api';
+import { getUsers } from '../../utils/api';
 
 import {
   Button,
@@ -16,12 +15,13 @@ import {
   TextField,
   Typography,
 } from '@mui/material';
+import { IUserData } from '../../App';
 
 const schema = object().shape({
   email: string()
     .email('Введите действительный адрес электронной почты')
     .required('Введите действительный адрес электронной почты'),
-  number: string(),
+  number: string().default(''),
 });
 
 interface TextMaskCustomProps {
@@ -49,10 +49,12 @@ const TextMaskCustom = forwardRef<HTMLInputElement, TextMaskCustomProps>(
 );
 
 interface IForm {
-  setUsers: (res) => void;
+  setUsers: (users: IUserData[]) => void;
+  setIsLoading: (isLoading: boolean) => void;
+  loading: boolean;
 }
 
-export const Form: FC<IForm> = ({ setUsers }) => {
+export const Form: FC<IForm> = ({ setUsers, setIsLoading, loading }) => {
   const {
     handleSubmit,
     formState: { errors, isValid },
@@ -66,16 +68,16 @@ export const Form: FC<IForm> = ({ setUsers }) => {
     },
   });
 
-  const [isLoading, setIsLoading] = useState(false);
-
-  const onSubmit = async (data) => {
+  const onSubmit = async (data: IUserData) => {
     try {
       setIsLoading(true);
-      const result = await getUser(data);
+      setUsers([]);
+      const result = await getUsers(data);
       setUsers(result);
-      setIsLoading(false);
     } catch (e) {
       console.error(e);
+    } finally {
+      setIsLoading(false);
     }
   };
 
@@ -143,9 +145,9 @@ export const Form: FC<IForm> = ({ setUsers }) => {
           <Button
             variant="contained"
             type="submit"
-            disabled={!isValid || isLoading}
+            disabled={!isValid || loading}
           >
-            {isLoading ? 'Searching...' : 'Search'}
+            {loading ? 'Searching...' : 'Search'}
           </Button>
         </CardActions>
       </Stack>

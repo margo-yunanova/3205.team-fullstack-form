@@ -8,13 +8,13 @@ interface IUser {
   number: string;
 }
 
-export const getUser = async ({
+export const getUsers = async ({
   email,
   number = '',
 }: {
   email: string;
   number: string;
-}): Promise<IUser> => {
+}): Promise<IUser[]> => {
   const params = new URLSearchParams({ email: email });
 
   if (number !== '') {

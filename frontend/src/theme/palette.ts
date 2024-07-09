@@ -9,9 +9,8 @@ export const palette: Partial<Palette> = {
   },
   text: {
     primary: '#212B27',
-    secondary: '#32403B',
+    secondary: '#808080',
     disabled: '',
-    placeholder: `rgba(0, 0, 0, 0.5)`,
     button: '#FFFFFF',
   },
 };

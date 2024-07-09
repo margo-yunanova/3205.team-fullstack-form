@@ -1,49 +1,86 @@
-# Приложение - Форма
+# Fullstack приложение для поиска пользователей
 
-Данное приложение разработано в рамках выполнения профильного задания - Fullstack-разработчик в 3205.team.
+Тестовое задание для 3205.team.
+Бэкенд реализован тремя способами: express.js, Netlify serverless function и мок (mock service worker). 
 
 
 ## Ссылка на деплой приложения
 
-Storybook задеплоен на сайте, чтобы можно было просматривать и тестировать все доступные компоненты в одном месте. 
-
-Ссылка
+Приложение задеплоено c serverless функцией на https://userssearchform.netlify.app
 
 ## Сборка и запуск проекта
 
-### Запуск Storybook
+### Проверка компонентов в Storybook
 
 ```bash
-npm install
-npm run storybook
+cd frontend
+npm install && npm run storybook
 ```
 
 Откройте http://localhost:6006, чтобы посмотреть результат в браузере.
 
 ### Запуск в режиме разработки
 
+#### 1 режим: запуск с nodejs express.js.
+
 ```bash
-npm install
-npm run dev
+cd backend
+npm install && npm run dev
+```
+
+```bash
+cd frontend
+npm install && npm run dev
 ```
 
 Откройте http://localhost:5173, чтобы посмотреть результат в браузере.
 
-### Локальное тестирование приложения
+#### 2 режим: запуск с netlify serverless функцией.
 
 ```bash
-$ npm run build
-$ npm run preview
+cd frontend
+npm install netlify-cli -g
+npm install && netlify dev
 ```
+
+Откройте http://localhost:8888, чтобы посмотреть результат в браузере.
+
+#### 3 режим: запуск с MockServerWorker:
+
+```bash
+cd frontend
+npm install && npm run dev-msw
+```
+
+Откройте http://localhost:5173, чтобы посмотреть результат в браузере.
+
+### Локальное тестирование продакшн сборки
+
+```bash
+cd backend
+npm install && npm run build && npm run start
+```
+
+```bash
+cd frontend
+npm install && npm run build && npm run preview
+```
+
+Откройте http://localhost:4173, чтобы посмотреть результат в браузере.
 
 ## Стек технологий
 
-Фронтенд написан на React + TypeScript со сборщиком Vite
+Фронтенд написан на React + TypeScript со сборщиком Vite, бэкенд на Express.JS
 
 |Пакеты|Назначение|
 |:----|:----|
 |[MUI](https://mui.com/)|Библиотека компонентов для создания интерфейсов|
 |[Storybook](https://storybook.js.org/)|Библиотека для разработки, тестирования и документации компонентов UI.|
+|[MSW](https://mswjs.io/)|Библиотека для имитации API, которая позволяет создавать мок, перехватывая запросы на сетевом уровне.|
+|[React-hook-form](https://react-hook-form.com/)|Библиотека для работы с формами.|
+|[React-imask](https://www.npmjs.com/package/react-imask)|Библиотека для преобразования отображаемых данных для форм.|
+|[Yup](https://github.com/jquense/yup)|Библиотека для валидации данных.|
+|[Celebrate](https://github.com/arb/celebrate)|Библиотека для валидации данных на бэкенде.|
 
 # Техническое задание
 

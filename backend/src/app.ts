@@ -1,8 +1,6 @@
 import express from 'express';
 import { celebrate, Joi, errors, Segments } from 'celebrate';
-import db from './db/db.json';
-
-const delay = (ms: number) => new Promise((resolve) => setTimeout(resolve, ms));
+import { getUsers } from './controllers/users';
 
 const app = express();
 const { PORT = 3000 } = process.env;
@@ -19,17 +17,7 @@ app.get(
       number: Joi.string(),
     },
   }),
-  async (req, res) => {
-    const { email, number } = req.query;
-
-    const users = db.filter(
-      (user) =>
-        user.email === email &&
-        (number === undefined || user.number === number),
-    );
-    await delay(5000);
-    res.send(users);
-  },
+  getUsers,
 );
 
 app.use(errors());

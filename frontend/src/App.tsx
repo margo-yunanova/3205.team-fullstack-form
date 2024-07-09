@@ -15,7 +15,13 @@ function App() {
   const [isLoading, setIsLoading] = useState(false);
 
   return (
-    <Stack display="flex" flexDirection="column" gap="30px" alignItems="center">
+    <Stack
+      display="flex"
+      flexDirection="column"
+      gap="30px"
+      alignItems="center"
+      width="100%"
+    >
       <Form
         setUsers={setUsers}
         loading={isLoading}
@@ -23,7 +29,7 @@ function App() {
       />
       {users && users.length > 0 && <UsersTable users={users} />}
       {users && users.length === 0 && !isLoading && (
-        <Typography>Пользователи не найдены</Typography>
+        <Typography>Users not found</Typography>
       )}
       {isLoading && (
         <>

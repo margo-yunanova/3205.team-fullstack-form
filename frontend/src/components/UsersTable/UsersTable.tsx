@@ -15,10 +15,10 @@ export const UsersTable: FC<{ users: IUserData[] }> = ({ users }) => {
   return (
     <TableContainer
       component={Paper}
-      sx={{ width: '700px', borderRadius: '25px' }}
+      sx={{ maxWidth: '700px', borderRadius: '25px' }}
     >
       <Table
-        sx={{ width: '650px', margin: '0 auto' }}
+        sx={{ maxWidth: '650px', margin: '0 auto' }}
         size="small"
         aria-label="a dense table"
       >

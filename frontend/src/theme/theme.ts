@@ -24,7 +24,7 @@ export const theme = createTheme({
           },
         },
         contained: {
-          width: '390px',
+          maxWidth: '390px',
           backgroundColor: palette.background?.button,
           color: palette.text?.button,
           borderRadius: '23px',

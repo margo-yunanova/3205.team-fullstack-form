@@ -82,9 +82,9 @@ export const Form: FC<IForm> = ({ setUsers, setIsLoading, loading }) => {
   };
 
   return (
-    <Card sx={{ width: '700px' }}>
+    <Card sx={{ width: '100%' }}>
       <Stack
-        padding="60px"
+        padding="25px"
         display="flex"
         flexDirection="column"
         alignItems="center"
